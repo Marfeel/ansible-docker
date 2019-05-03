@@ -5,7 +5,8 @@ RUN apt-get update && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt install -y python3.7 git && \
-    apt-get install -y ansible
+    apt-get install -y ansible && \
+    rm -rf /var/lib/apt/lists/* 
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
