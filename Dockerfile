@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-add-repository ppa:ansible/ansible && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt install -y python3.7 git && \
+    apt install -y python3.7 git curl jq && \
     apt-get install -y ansible && \
     rm -rf /var/lib/apt/lists/* 
 
