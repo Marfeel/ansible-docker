@@ -1,16 +1,21 @@
-FROM ubuntu:16.04
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y software-properties-common && \
-    apt-add-repository ppa:ansible/ansible && \
+FROM ubuntu:18.04
+RUN apt update && \
+    apt install --no-install-recommends -y software-properties-common && \
+    apt-add-repository ppa:ansible/ansible-2.7 && \
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get update && \
-    apt install -y python3.7 git curl jq python3-requests && \
-    apt-get install -y ansible && \
-    rm -rf /var/lib/apt/lists/* 
+    apt update && \
+    apt install -y \
+        python3.7 \
+        git \
+        curl \
+        jq \
+        python3-requests \
+        ansible && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
-        echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
+    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     echo "    IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
