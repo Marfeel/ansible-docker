@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 RUN apt update && \
     apt install --no-install-recommends -y software-properties-common && \
-    apt-add-repository ppa:ansible/ansible-2.7 && \
+    apt-add-repository ppa:ansible/ansible-2.8 && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt update && \
     apt install -y \
