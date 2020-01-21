@@ -10,6 +10,7 @@ RUN apt update && \
         curl \
         jq \
         python3-requests \
+        rsync \
         ansible && \
     rm -rf /var/lib/apt/lists/*
 
