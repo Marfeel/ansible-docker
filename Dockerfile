@@ -6,13 +6,15 @@ RUN apt update && \
     apt update && \
     apt install -y \
         python3.7 \
+        python3-pip \
         git \
         curl \
         jq \
         python3-requests \
         rsync \
         ansible && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    pip3 install jmespath
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
