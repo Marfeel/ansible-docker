@@ -6,6 +6,7 @@ RUN apt update && \
     apt update && \
     apt install -y \
         python3.7 \
+        python3-pip \
         python-pip \
         git \
         curl \
@@ -14,6 +15,7 @@ RUN apt update && \
         rsync \
         ansible && \
     rm -rf /var/lib/apt/lists/* && \
+    pip3 install jmespath && \
     pip install jmespath
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
