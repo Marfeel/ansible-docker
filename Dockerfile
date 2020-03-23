@@ -15,7 +15,7 @@ RUN apt update && \
         rsync \
         ansible && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install jmespath && \
+    pip3 install jmespath ansible-lint && \
     pip install jmespath
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
