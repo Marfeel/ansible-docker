@@ -1,4 +1,6 @@
 FROM ubuntu:18.04
+ARG TF_VERSION="0.12.24"
+
 RUN apt update && \
     apt install --no-install-recommends -y software-properties-common && \
     apt-add-repository ppa:ansible/ansible-2.8 && \
@@ -13,6 +15,8 @@ RUN apt update && \
         jq \
         python3-requests \
         rsync \
+        wget \
+        unzip \
         ansible && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install jmespath ansible-lint && \
@@ -31,5 +35,9 @@ RUN groupadd -g 1004 jenkins && \
 RUN \
     mkdir -p /home/jenkins/.ssh/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
+
+RUN \
+    wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
+    unzip terraform_0.12.24_linux_amd64.zip -d /usr/local/bin/
 
 USER jenkins
