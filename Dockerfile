@@ -13,6 +13,8 @@ RUN apt update && \
         jq \
         python3-requests \
         rsync \
+        wget \
+        unzip \
         ansible && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install jmespath ansible-lint && \
@@ -31,5 +33,9 @@ RUN groupadd -g 1004 jenkins && \
 RUN \
     mkdir -p /home/jenkins/.ssh/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
+
+RUN \
+    wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip && \
+    unzip terraform_0.12.24_linux_amd64.zip -d /usr/local/bin/
 
 USER jenkins
