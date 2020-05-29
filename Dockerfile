@@ -19,7 +19,7 @@ RUN apt update && \
         unzip \
         ansible && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install jmespath ansible-lint && \
+    pip3 install jmespath ansible-lint jsonschema && \
     pip install jmespath
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
