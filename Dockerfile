@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-ARG TF_VERSION="0.12.24"
 
 RUN apt update && \
     apt install --no-install-recommends -y software-properties-common && \
@@ -36,8 +35,9 @@ RUN \
     mkdir -p /home/jenkins/.ssh/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
 
-RUN \
-    wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
-    unzip terraform_0.12.24_linux_amd64.zip -d /usr/local/bin/
+RUN   echo "127.0.0.10\tlive.mrf.io" >> /etc/hosts
+RUN   echo "127.0.0.10\tliveint.mrf.io" >> /etc/hosts
+RUN   echo "127.0.0.10\td1gmjfhqrg3vai.cloudfront.net"  >> /etc/hosts
+RUN   echo "127.0.0.10\tamp.washingtontimes.com" >> /etc/hosts
 
 USER jenkins
