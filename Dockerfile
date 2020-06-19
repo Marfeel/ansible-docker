@@ -1,26 +1,42 @@
 FROM ubuntu:18.04
 ARG TF_VERSION="0.12.24"
 
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt update && \
-    apt install --no-install-recommends -y software-properties-common && \
+    apt install --no-install-recommends -y software-properties-common \
+    ca-certificates \
+    curl \
+    apt-transport-https \
+    gpg-agent && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
     apt-add-repository ppa:ansible/ansible-2.8 && \
     add-apt-repository ppa:deadsnakes/ppa && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
     apt update && \
     apt install -y \
         python3.7 \
         python3-pip \
         python-pip \
         git \
-        curl \
         jq \
         python3-requests \
         rsync \
         wget \
         unzip \
-        ansible && \
+        ansible \
+        pwgen \
+        awscli \
+        docker-ce && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install jmespath ansible-lint jsonschema && \
     pip install jmespath
+
+RUN curl -L https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -o /tmp/hub-linux-amd64-2.14.2.tgz && \
+    tar zxvf /tmp/hub-linux-amd64-2.14.2.tgz -C /tmp/ && \
+    bash /tmp/hub-linux-amd64-2.14.2/install && \
+    rm -rf /tmp/hub-linux-amd64-2.14.2.tgz
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
