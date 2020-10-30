@@ -28,7 +28,8 @@ RUN apt update && \
         ansible \
         pwgen \
         awscli \
-        docker-ce && \
+        docker-ce \
+        libxml2-utils && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install jmespath ansible-lint jsonschema && \
     pip install jmespath
