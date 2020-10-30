@@ -29,10 +29,12 @@ RUN apt update && \
         pwgen \
         awscli \
         docker-ce \
-        libxml2-utils && \
+        libxml2-utils \
+        npm && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install jmespath ansible-lint jsonschema && \
-    pip install jmespath
+    pip install jmespath && \
+    npm install -g sql-lint
 
 RUN curl -L https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -o /tmp/hub-linux-amd64-2.14.2.tgz && \
     tar zxvf /tmp/hub-linux-amd64-2.14.2.tgz -C /tmp/ && \
