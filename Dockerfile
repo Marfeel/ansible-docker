@@ -30,7 +30,8 @@ RUN apt update && \
         libxml2-utils \
         npm && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install ansible==2.9.8 jmespath ansible-lint jsonschema boto3 && \
+    pip3 install ansible==2.9.8 jmespath ansible-lint jsonschema boto3 openshift && \
+    pip3 install -U PyYAML && \
     pip install jmespath && \
     npm install -g sql-lint
 
