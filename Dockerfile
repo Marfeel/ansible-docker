@@ -11,7 +11,6 @@ RUN apt update && \
     apt-transport-https \
     gpg-agent && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    apt-add-repository ppa:ansible/ansible-2.9 && \
     add-apt-repository ppa:deadsnakes/ppa && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
     apt update && \
@@ -25,14 +24,13 @@ RUN apt update && \
         rsync \
         wget \
         unzip \
-        ansible \
         pwgen \
         awscli \
         docker-ce \
         libxml2-utils \
         npm && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install jmespath ansible-lint jsonschema boto3 && \
+    pip3 install ansible==2.9.8 jmespath ansible-lint jsonschema boto3 && \
     pip install jmespath && \
     npm install -g sql-lint
 
@@ -40,6 +38,9 @@ RUN curl -L https://github.com/github/hub/releases/download/v2.14.2/hub-linux-am
     tar zxvf /tmp/hub-linux-amd64-2.14.2.tgz -C /tmp/ && \
     bash /tmp/hub-linux-amd64-2.14.2/install && \
     rm -rf /tmp/hub-linux-amd64-2.14.2.tgz
+
+RUN mkdir /etc/ansible/ && \
+    touch /etc/ansible/hosts
 
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
