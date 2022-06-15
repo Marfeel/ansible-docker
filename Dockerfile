@@ -22,6 +22,7 @@ RUN apt update && \
         jq \
         python3-dnspython \
         python3-requests \
+        python3-passlib \
         rsync \
         wget \
         unzip \
