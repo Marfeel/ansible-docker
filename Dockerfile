@@ -47,6 +47,8 @@ RUN mkdir /etc/ansible/ && \
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN \
     echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
+    echo "    IdentityFile ~/.ssh/id_ed25519" >> /etc/ssh/ssh_config && \
+    echo "    IdentityFile ~/.ssh/id_dsa" >> /etc/ssh/ssh_config && \
     echo "    IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
