@@ -1,22 +1,22 @@
-FROM ubuntu:20.04
-ARG TF_VERSION="0.12.24"
-ARG ANSIBLE_VERSION="5.4.0"
+FROM ubuntu:22.04
+ARG TF_VERSION="0.14.6"
+ARG ANSIBLE_VERSION="7.1.0"
 
 ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt update && \
-    apt install --no-install-recommends -y software-properties-common \
-    ca-certificates \
-    curl \
-    apt-transport-https \
-    gpg-agent && \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y  \
+        software-properties-common \
+        ca-certificates \
+        curl \
+        apt-transport-https \
+        gpg-agent && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    add-apt-repository ppa:deadsnakes/ppa && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
-    apt update && \
-    apt install -y \
-        python3.7 \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable" && \
+    apt-get update && \
+    apt-get install -y \
+        python3 \
         python3-pip \
         git \
         jq \
@@ -32,7 +32,7 @@ RUN apt update && \
         libxml2-utils \
         npm && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install ansible==${ANSIBLE_VERSION} jmespath ansible-lint==${ANSIBLE_VERSION} jsonschema boto3 openshift==0.11.0 kubernetes==11.0.0 && \
+    pip3 install ansible==${ANSIBLE_VERSION} jmespath ansible-lint jsonschema boto3 openshift==0.11.0 kubernetes==11.0.0 && \
     pip3 install -U PyYAML && \
     npm install -g sql-lint
 
