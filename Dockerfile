@@ -23,6 +23,7 @@ RUN apt-get update && \
         python3-dnspython \
         python3-requests \
         python3-passlib \
+        python3-netaddr \
         rsync \
         wget \
         unzip \
