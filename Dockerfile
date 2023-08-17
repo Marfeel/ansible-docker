@@ -24,6 +24,7 @@ RUN apt-get update && \
         python3-requests \
         python3-passlib \
         python3-netaddr \
+        python3-docker \
         rsync \
         wget \
         unzip \
