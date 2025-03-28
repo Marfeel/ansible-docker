@@ -25,6 +25,7 @@ RUN apt-get update && \
         python3-passlib \
         python3-netaddr \
         python3-docker \
+        python3-pymysql \
         rsync \
         wget \
         unzip \
